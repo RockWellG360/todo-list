@@ -1,9 +1,8 @@
-<ul class="pagination">
+<div id='pagination'>
 {% if page > 1 %}
-    <li><a href="{{page_url}}">First Page</a></li>
-{% endif %}
+    <a class="btn" href="{{page_url}}">First Page</a>
 
-    
+{% endif %}
 
     {% set total_pages = (total_datas / records_per_page)|round(0,'ceil') %}
 
@@ -19,17 +18,15 @@
 
         {% if ((initial_num > 0) and (initial_num <= total_pages)) %}
             {% if initial_num == 1 %}
-                <li class='active'><a href="{{page_url}}page={{ initial_num }}"  class='active'>{{ initial_num }}</a></li>
+                <a class="btn" href="{{page_url}}page={{ initial_num }}">{{ initial_num }}</a>
             {% else %}
-                <li><a href="{{page_url}}page={{ initial_num }}">{{ initial_num }}</a></li>
+                <a class="btn" href="{{page_url}}page={{ initial_num }}">{{ initial_num }}</a>
             {% endif %}
         {% endif %}
     {% endfor %}
 
     {% if page < total_pages %}
-        <li><a href="{{page_url}}page={{ total_pages }}">
-            Last Page
-        </a></li>
+        <a class="btn"href="{{page_url}}page={{ total_pages }}">Last Page</a>
     {% endif %}
 
-</ul>
+</div>
