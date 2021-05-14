@@ -1,0 +1,35 @@
+<ul class="pagination">
+{% if page > 1 %}
+    <li><a href="{{page_url}}">First Page</a></li>
+{% endif %}
+
+    
+
+    {% set total_pages = (total_datas / records_per_page)|round(0,'ceil') %}
+
+    {% set range = 2 %}
+
+    {% set initial_num = page - range %}
+
+    {% set per_page = 1 %}
+
+    {% set condition_limit_num = (page + range) + 1 %}
+
+    {% for initial_num in per_page .. condition_limit_num %}
+
+        {% if ((initial_num > 0) and (initial_num <= total_pages)) %}
+            {% if initial_num == 1 %}
+                <li class='active'><a href="{{page_url}}page={{ initial_num }}"  class='active'>{{ initial_num }}</a></li>
+            {% else %}
+                <li><a href="{{page_url}}page={{ initial_num }}">{{ initial_num }}</a></li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    {% if page < total_pages %}
+        <li><a href="{{page_url}}page={{ total_pages }}">
+            Last Page
+        </a></li>
+    {% endif %}
+
+</ul>

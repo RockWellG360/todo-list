@@ -1,0 +1,30 @@
+{% if total_rows > 0 %}
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Created at</th>
+        <th width="12%">Action</th>
+    </tr>
+    {% for data in datas %}
+    <tr>
+        <td>
+            {{data['title']}}
+        </td>
+        <td>
+            {{data['description']}}
+        </td>
+        <td>
+            {{data['created_at']}}
+        </td>
+        <td>
+            <a class="button info-btn" href="update_todo.php?id={{data['id']}}">Edit</a>
+            <button class="button danger-btn delete-object" delete-id="{{data['id']}}">Delete</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+    <div class='alert alert-danger'>No Todo/s found.</div>
+{% endif %}
