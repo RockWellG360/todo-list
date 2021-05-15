@@ -11,15 +11,15 @@ a todo list using php and twig
 
 # Dependencies
 
-Twig 3.^,
+Twig 3.^  <br />
 php ^7.3
 
 # Features
 
-CRUD List (CRUD in Progress)
-Advance Pagination
+CRUD List (CRUD in Progress)  <br />
+Advance Pagination  <br />
 Fetch API
 
 # Design Patterns
-Factory Design
+Factory Design,  <br />
 Adapter - in progress
