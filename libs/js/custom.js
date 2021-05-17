@@ -32,6 +32,48 @@ $(document).on('click', '.delete-object', function(){
     return false;
 });
 
+// JavaScript for deleting todo
+$(document).on('click', '.edit-object', function(){
+   
+    var id = $(this).attr('edit-data');
+    var title = $(this).attr('edit-title');
+    var description = $(this).attr('edit-description');
+
+    var frm_str = '<div>'
+        +'<h1>Update Todo</h1>'
+        + '</div>' 
+        + '<form id="formId" action="">'
+        + '<table class="table">'
+        + '<tr>'
+        + '<td>Title</td>'
+        + '<td><input type="text" name="title" id="title" value='+ title +' /></td>'
+        + '</tr>'
+        + '<tr>'
+        + '<td>Description</td>'
+        + '<td><textarea name="description" id="description">'+ description +'</textarea></td>'
+        + '</tr>'
+        + '</table>'
+        + '</form>';
+    
+    bootbox.confirm(frm_str, function(result) {
+        
+       
+        if(result==true){
+            $('#formId').submit();
+            $.post('update_todo.php', {
+                id: id,
+                title: document.getElementById("title").value,
+                description: document.getElementById("description").value
+            }, function(data){
+                window.location.reload();
+            }).fail(function() {
+                alert('Unable to delete.');
+            });
+        }
+});
+    return false;
+});
+
 // Get the container element
 var btnContainer = document.getElementById("pagination");
 
@@ -52,3 +94,4 @@ btns[i].addEventListener("click", function() {
     this.className += " active";
 });
 }
+

@@ -18,7 +18,7 @@
             {{data['created_at']}}
         </td>
         <td>
-            <a class="button info-btn" href="update_todo.php?id={{data['id']}}">Edit</a>
+            <button class="button info-btn edit-object" edit-data="{{data['id']}}" edit-title="{{data['title']}}" edit-description="{{data['description']}}">Edit</button>
             <button class="button danger-btn delete-object" delete-id="{{data['id']}}">Delete</button>
         </td>
     </tr>
