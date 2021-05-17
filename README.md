@@ -19,7 +19,3 @@ php ^7.3
 CRUD List (CRUD in Progress)  <br />
 Advance Pagination  <br />
 Fetch API
-
-# Design Patterns
-Factory Design,  <br />
-Adapter
