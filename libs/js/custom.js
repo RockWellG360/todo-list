@@ -1,4 +1,4 @@
-// JavaScript for deleting product
+// JavaScript for deleting todo
 $(document).on('click', '.delete-object', function(){
    
     var id = $(this).attr('delete-id');
@@ -67,7 +67,7 @@ $(document).on('click', '.edit-object', function(){
             }, function(data){
                 window.location.reload();
             }).fail(function() {
-                alert('Unable to delete.');
+                alert('Unable to update.');
             });
         }
 });
