@@ -9,11 +9,18 @@ include_once 'config/core.php';
 include_once 'config/database.php';
 include_once 'controller/todo.php';
 
-  
+include "Db/Config.php";
+include "Db/Factory.php";
+include "Db/Adapter/AdapterInterface.php";
+include "Db/Adapter/Mysql.php";
+include "Db/Adapter/Pdo.php";
+
+$config = new \Db\Config();
+
+$db = \Db\Factory::getConnection($config);
 // instantiate database and todo object
-$database = new Database();
-$db = $database->getConnection();
-  
+// $database = new Database();
+// $db = $database->getConnection();
 $todo = new Todo($db);
   
 $page_title = "Todo Lists";
@@ -32,20 +39,15 @@ $page_url = "index.php?";
 // count total rows - used for pagination
 $total_rows=$todo->countAll();
   
-// read_template.php controls how the todo list will be rendered
-$results = array();
-
-while ($arr = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $results[] = $arr;
-}
-
+// read_template.twig controls how the todo list will be rendered
 echo $twig->render('read_template.twig', array(
-    'datas'=>$results, 
-    'total_rows'=>$total_rows
+    'datas'=>$stmt, 
+    'total_rows'=>count($total_rows)
 ));
 
+// paging.twig controls how the todo list will be rendered
 echo $twig->render('paging.twig', array(
-    'total_datas'=>$total_rows, 
+    'total_datas'=>count($total_rows), 
     'page_url'=>$page_url,
     'page'=>$page,
     'records_per_page'=>$records_per_page,

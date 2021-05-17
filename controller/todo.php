@@ -57,8 +57,7 @@ class Todo{
                 LIMIT
                     {$from_record_num}, {$records_per_page}";
       
-        $stmt = $this->conn->prepare( $query );
-        $stmt->execute();
+        $stmt = $this->conn->fetch( $query );
 
         return $stmt;
     }
@@ -68,12 +67,9 @@ class Todo{
     
         $query = "SELECT id FROM " . $this->table_name . "";
     
-        $stmt = $this->conn->prepare( $query );
-        $stmt->execute();
+        $stmt = $this->conn->fetch( $query );
     
-        $num = $stmt->rowCount();
-    
-        return $num;
+        return $stmt;
     }
 
     function readOne(){

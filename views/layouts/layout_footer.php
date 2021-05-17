@@ -12,7 +12,7 @@
 $(document).on('click', '.delete-object', function(){
    
     var id = $(this).attr('delete-id');
-  
+    
     bootbox.confirm({
         message: "<h4>Are you sure?</h4>",
         buttons: {
