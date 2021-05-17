@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <title>Todo Lists</title>
+   
+    <!-- our custom CSS -->
+    {% block stylesheets %}
+        <link rel="stylesheet" href="libs/css/custom.css" />
+    {% endblock %}
+   
+</head>
+<body>
+    {% include 'layouts/header.twig' %}
+    <!-- container -->
+        {% block container %}
+            {% include 'read_template.twig' with {
+                'datas':datas,
+                'total_rows':total_rows
+            } %}
+
+            {% include 'paging.twig' with {
+                'total_datas':total_datas,
+                'page_url':page_url,
+                'page':page,
+                'records_per_page':records_per_page,
+                'from_record_num':from_record_num
+            } %}
+        {% endblock %}
+    <!-- /container -->
+    
+<!-- jQuery (necessary for JavaScript plugins) -->
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+<script src="libs/js/custom.js"></script>
+{% endblock %}
+</body>
+</html>
