@@ -22,4 +22,4 @@ Fetch API
 
 # Design Patterns
 Factory Design,  <br />
-Adapter - in progress
+Adapter
