@@ -41,6 +41,9 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
+.error {
+  color: red;
+}
 /* css for buttons */
 .button {
   background-color: #4caf50; /* Green */
