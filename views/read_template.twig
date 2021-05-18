@@ -1,5 +1,5 @@
 {% if total_rows > 0 %}
-<table>
+<table id="todo_list_pc">
     <tr>
         <th>Title</th>
         <th>Description</th>
@@ -24,6 +24,22 @@
     </tr>
     {% endfor %}
 </table>
+
+<div id="todo_list_mobile">
+    {% for data in datas %}
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <h3>{{data['title']}}</h3>
+                <p>{{data['description']}}</p>
+                <p>{{data['created_at']}}</p>
+                <button class="button info-btn edit-object" edit-data="{{data['id']}}" edit-title="{{data['title']}}" edit-description="{{data['description']}}">Edit</button>
+                <button class="button danger-btn delete-object" delete-id="{{data['id']}}">Delete</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 {% else %}
     <div class='alert alert-danger'>No Todo/s found.</div>

@@ -46,6 +46,11 @@ class Todo{
   
     }
 
+    /**
+     * @param from_record_num $from_record_num
+     * @param records_per_page $records_per_page
+     * @return data
+     */
     function readAll($from_record_num, $records_per_page){
   
         $query = "SELECT
