@@ -19,6 +19,10 @@ class Mysqli implements \Db\Adapter\AdapterInterface
         $this->conn = new \mysqli($config->host, $config->user, $config->password, $config->dbscheme);
     }
     
+    /**
+     * @param string $sql
+     */
+    
     public function fetch($sql)
     {
         $result = $this->conn->query($sql);

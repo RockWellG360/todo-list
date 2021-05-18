@@ -26,6 +26,11 @@ class Pdo implements \Db\Adapter\AdapterInterface
         }
         
     }
+
+    /**
+     * @param string $sql
+     */
+
     public function fetch($sql)
     {
         $sth = $this->conn->prepare($sql);
