@@ -91,18 +91,20 @@ class Mysqli implements \Db\Adapter\AdapterInterface
 
     public function editTodo(array $data){
         
+        // posted values
+        $title = $data['title'];
+        $description = $data['description'];
+        $id = $data['id'];
+        
         $query = "UPDATE " . $this->table_name . "
         SET title=?,description=? WHERE id=?";
       
         $result = $this->conn->prepare($query);
       
-        // posted values
-        $data['title']=htmlspecialchars(strip_tags($data['title']));
-        $data['description']=htmlspecialchars(strip_tags($data['description']));
-        $data['id']=htmlspecialchars(strip_tags($data['id']));
+        
       
         // bind parameters
-        $result->bind_param("sss", $data['title'],$data['description'],$data['id']);
+        $result->bind_param("sss", $title,$description,$id);
         
         $result->execute();
     }

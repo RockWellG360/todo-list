@@ -66,7 +66,7 @@ $(document).on('click', '.edit-object', function(){
                 title: document.getElementById("title").value,
                 description: document.getElementById("description").value
             }, function(data){
-                window.location.href = current_url;
+                window.location.reload();
             }).fail(function() {
                 alert('Unable to update.');
             });

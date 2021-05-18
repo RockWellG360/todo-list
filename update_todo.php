@@ -22,9 +22,6 @@ $todo = new Todo($db);
 // set ID property of todo to be edited
 $todo->id = $id;
   
-// read the details of todo to be edited
-$todo->readOne();
-  
 // if the form was submitted
 if($_POST){
   
@@ -35,14 +32,9 @@ if($_POST){
 
     // update the todo
     if($todo->updateTodo()){
-       echo "Todo was updated.";
-    }
-  
-    // if unable to update the todo, tell the user
-    else{
-        echo "<div class='alert alert-danger alert-dismissable'>";
-            echo "Unable to update todo.";
-        echo "</div>";
+        echo "Todo was updated.";
+    }else{
+        echo "Unable to update todo.";
     }
 }
 ?>
