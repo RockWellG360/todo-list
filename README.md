@@ -9,7 +9,8 @@ a todo list using php and twig
 
 # Configuration
 
-* Create a todos table name with columns of id, title, description and created_at
+* Create a database `todo_db` with the table `todos` with columns of `id, title, description and created_at`
+* Or you can copy the todo_db.sql and run it to any MySQL GUI
 
 You need to configure your database credentials under
 > DB/Config.php
