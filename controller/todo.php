@@ -5,7 +5,6 @@ class Todo{
     
     // database connection and table name
     private $conn;
-    private $table_name = "todos";
   
     // object properties
     public $id;
@@ -18,27 +17,17 @@ class Todo{
     }
   
     // create todo
-    function create(){
+    function store(){
   
-       // insert query
-        $query = "INSERT INTO " . $this->table_name . "
-        SET title=:title,description=:description,created_at=:created_at";
-  
-        $stmt = $this->conn->prepare($query);
-  
-        // posted values
-        $this->title=htmlspecialchars(strip_tags($this->title));
-        $this->description=htmlspecialchars(strip_tags($this->description));
-  
-        // to get time-stamp for 'created_at' field
-        $this->timestamp = date('Y-m-d H:i:s');
-  
-        // bind values 
-        $stmt->bindParam(":title", $this->title);
-        $stmt->bindParam(":description", $this->description);
-        $stmt->bindParam(":created_at", $this->timestamp);
-  
-        if($stmt->execute()){
+        $data = array(
+            "title" => $this->title,
+            "description" => $this->description
+        );
+
+        // insert query
+        $stmt = $this->conn->insert($data);
+        
+        if($stmt){
             return true;
         }else{
             return false;
@@ -53,87 +42,56 @@ class Todo{
      */
     function readAll($from_record_num, $records_per_page){
   
-        $query = "SELECT
-                    id, title, description, created_at
-                FROM
-                    " . $this->table_name . "
-                ORDER BY
-                    created_at DESC
-                LIMIT
-                    {$from_record_num}, {$records_per_page}";
-      
-        $stmt = $this->conn->fetch( $query );
+        $stmt = $this->conn->getAllTodo($from_record_num, $records_per_page);
 
-        return $stmt;
-    }
-
-    // used for paging todos
-    public function countAll(){
-    
-        $query = "SELECT id FROM " . $this->table_name . "";
-    
-        $stmt = $this->conn->fetch( $query );
-    
         return $stmt;
     }
 
     function readOne(){
   
-        $query = "SELECT title, description
-            FROM " . $this->table_name . "
-            WHERE id = ?
-            LIMIT 0,1";
-      
-        $stmt = $this->conn->prepare( $query );
-        $stmt->bindParam(1, $this->id);
-        $stmt->execute();
-      
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      
+        $row = $this->conn->getTodo();
+
         $this->title = $row['title'];
         $this->description = $row['description'];
     }
 
-    function update(){
-  
-        $query = "UPDATE
-                    " . $this->table_name . "
-                SET
-                    title = :title,
-                    description = :description
-                WHERE
-                    id = :id";
-      
-        $stmt = $this->conn->prepare($query);
-      
-        // posted values
-        $this->title=htmlspecialchars(strip_tags($this->title));
-        $this->description=htmlspecialchars(strip_tags($this->description));
-        $this->id=htmlspecialchars(strip_tags($this->id));
-      
-        // bind parameters
-        $stmt->bindParam(':title', $this->title);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':id', $this->id);
-      
-        // execute the query
-        if($stmt->execute()){
+    // used for paging todos
+    public function countAll(){
+    
+        $stmt = $this->conn->countTodo();
+    
+        return $stmt;
+    }
+
+    function updateTodo(){
+
+        $data = array(
+            "id" => $this->id,
+            "title" => $this->title,
+            "description" => $this->description
+        );
+        
+        // insert query
+        $stmt = $this->conn->editTodo($data);
+
+        if($stmt){
             return true;
+        }else{
+            return false;
         }
-      
-        return false;
           
     }
 
     // delete the product
     function delete(){
     
-        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $data = array(
+            "id" => $this->id
+        );
+
+        $stmt = $this->conn->remove($data);
         
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->id);
-    
-        if($result = $stmt->execute()){
+        if($stmt){
             return true;
         }else{
             return false;

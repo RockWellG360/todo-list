@@ -5,10 +5,7 @@ namespace Db;
  */
 class Config
 {
-    public function __construct($data) {
-        $this->driver = $data;
-    }
-
+    public $driver = 'Pdo';
     public $host = 'localhost';
     public $user = 'root';
     public $password = '';

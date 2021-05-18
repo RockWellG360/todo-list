@@ -1,10 +1,16 @@
 <?php
-include_once 'config/database.php';
 include_once 'controller/todo.php';
+
+include "Db/Config.php";
+include "Db/Factory.php";
+include "Db/Adapter/AdapterInterface.php";
+include "Db/Adapter/Mysql.php";
+include "Db/Adapter/Pdo.php";
   
 // get database connection
-$database = new Database();
-$db = $database->getConnection();
+$config = new \Db\Config();
+
+$db = \Db\Factory::getConnection($config);
   
 // pass connection to objects
 $todo = new Todo($db);
@@ -43,7 +49,7 @@ if($_POST){
   
     // create the todo
     if(!empty($_POST["title"]) && !empty($_POST["description"])){
-        $todo->create();
+        $todo->store();
         echo "<div class='alert alert-success'>todo was created.</div>";
     }
   

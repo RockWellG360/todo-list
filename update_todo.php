@@ -3,12 +3,18 @@
 $id = isset($_POST['id']) ? $_POST['id'] : die('ERROR: missing ID.');
   
 // include database and object files
-include_once 'config/database.php';
 include_once 'controller/todo.php';
   
+include "Db/Config.php";
+include "Db/Factory.php";
+include "Db/Adapter/AdapterInterface.php";
+include "Db/Adapter/Mysql.php";
+include "Db/Adapter/Pdo.php";
+
 // get database connection
-$database = new Database();
-$db = $database->getConnection();
+$config = new \Db\Config();
+
+$db = \Db\Factory::getConnection($config);
   
 // prepare objects
 $todo = new Todo($db);
@@ -23,14 +29,13 @@ $todo->readOne();
 if($_POST){
   
     // set todo property values
+    $todo->title = $_POST['id'];
     $todo->title = $_POST['title'];
     $todo->description = $_POST['description'];
-  
+
     // update the todo
-    if($todo->update()){
-        echo "<div class='alert alert-success alert-dismissable'>";
-            echo "Todo was updated.";
-        echo "</div>";
+    if($todo->updateTodo()){
+       echo "Todo was updated.";
     }
   
     // if unable to update the todo, tell the user

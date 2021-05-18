@@ -6,7 +6,6 @@ require 'vendor/autoload.php';
 include_once 'config/core.php';
   
 // include database and object files
-include_once 'config/database.php';
 include_once 'controller/todo.php';
 
 include "Db/Config.php";
@@ -15,8 +14,7 @@ include "Db/Adapter/AdapterInterface.php";
 include "Db/Adapter/Mysql.php";
 include "Db/Adapter/Pdo.php";
 
-$driver = 'Pdo';
-$config = new \Db\Config($driver);
+$config = new \Db\Config();
 
 $db = \Db\Factory::getConnection($config);
 // instantiate database and todo object

@@ -3,12 +3,18 @@
 if($_POST){
   
     // include database and object file
-    include_once 'config/database.php';
     include_once 'controller/todo.php';
   
+    include "Db/Config.php";
+    include "Db/Factory.php";
+    include "Db/Adapter/AdapterInterface.php";
+    include "Db/Adapter/Mysql.php";
+    include "Db/Adapter/Pdo.php";
+    
     // get database connection
-    $database = new Database();
-    $db = $database->getConnection();
+    $config = new \Db\Config();
+
+    $db = \Db\Factory::getConnection($config);
   
     // prepare todo object
     $todo = new Todo($db);
