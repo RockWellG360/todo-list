@@ -144,12 +144,14 @@ html {
 body {
   margin: 0;
 }
+
 .container {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
 }
+
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -166,9 +168,6 @@ body {
   }
 }
 
-table {
-  background-color: transparent;
-} 
 th {
   text-align: left;
 }

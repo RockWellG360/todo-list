@@ -38,6 +38,7 @@ $(document).on('click', '.edit-object', function(){
     var id = $(this).attr('edit-data');
     var title = $(this).attr('edit-title');
     var description = $(this).attr('edit-description');
+    var current_url = window.location.href;
 
     var frm_str = '<div>'
         +'<h1>Update Todo</h1>'
@@ -65,7 +66,7 @@ $(document).on('click', '.edit-object', function(){
                 title: document.getElementById("title").value,
                 description: document.getElementById("description").value
             }, function(data){
-                window.location.reload();
+                window.location.href = current_url;
             }).fail(function() {
                 alert('Unable to update.');
             });

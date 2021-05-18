@@ -15,7 +15,8 @@ include "Db/Adapter/AdapterInterface.php";
 include "Db/Adapter/Mysql.php";
 include "Db/Adapter/Pdo.php";
 
-$config = new \Db\Config();
+$driver = 'Pdo';
+$config = new \Db\Config($driver);
 
 $db = \Db\Factory::getConnection($config);
 // instantiate database and todo object

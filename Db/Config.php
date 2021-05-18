@@ -5,7 +5,10 @@ namespace Db;
  */
 class Config
 {
-    public $driver = 'Mysqli';
+    public function __construct($data) {
+        $this->driver = $data;
+    }
+
     public $host = 'localhost';
     public $user = 'root';
     public $password = '';

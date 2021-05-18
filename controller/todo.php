@@ -58,7 +58,7 @@ class Todo{
                 FROM
                     " . $this->table_name . "
                 ORDER BY
-                    title ASC
+                    created_at DESC
                 LIMIT
                     {$from_record_num}, {$records_per_page}";
       
