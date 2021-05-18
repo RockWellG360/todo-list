@@ -11,6 +11,9 @@ $todo = new Todo($db);
 
 // set page headers
 $page_title = "Create Todo";
+$titleErr = '';
+$descriptionErr = '';
+
 include_once "views/layouts/layout_header.php";
   
 echo "<div class='right-button-margin'>
@@ -21,13 +24,26 @@ echo "<div class='right-button-margin'>
 <?php 
 // if the form was submitted - PHP OOP CRUD Tutorial
 if($_POST){
+
+    if (empty($_POST["title"])) {
+        $titleErr = "Title is required";
+      } else {
+        $todo->title = $_POST['title'];
+    
+      }
+    
+      if (empty($_POST["description"])) {
+        $descriptionErr = "Description is required";
+      } else {
+        $todo->description = $_POST['description'];
+      }
   
     // set todo property values
-    $todo->title = $_POST['title'];
-    $todo->description = $_POST['description'];
+    
   
     // create the todo
-    if($todo->create()){
+    if(!empty($_POST["title"]) && !empty($_POST["description"])){
+        $todo->create();
         echo "<div class='alert alert-success'>todo was created.</div>";
     }
   
@@ -45,12 +61,12 @@ if($_POST){
   
         <tr>
             <td>Title</td>
-            <td><input type='text' name='title' /></td>
+            <td><input type='text' name='title' /> <span class="error">* <?php echo $titleErr;?></span></td>
         </tr>
   
         <tr>
             <td>Description</td>
-            <td><textarea name='description'></textarea></td>
+            <td><textarea name='description'></textarea> <span class="error">* <?php echo $descriptionErr;?></span></td>
         </tr>
   
         <tr>

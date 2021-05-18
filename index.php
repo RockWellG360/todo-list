@@ -20,8 +20,6 @@ $config = new \Db\Config($driver);
 
 $db = \Db\Factory::getConnection($config);
 // instantiate database and todo object
-// $database = new Database();
-// $db = $database->getConnection();
 $todo = new Todo($db);
   
 // query todos
